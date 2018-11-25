@@ -1,0 +1,34 @@
+.payment-method {
+  ul {
+    list-style: none;
+    float: left;
+    padding: 0;
+    li {
+      width: 175px;
+      padding: 25px;
+      background-color: #dcdcdc;
+      border: 1px solid #d0d0d0;
+      cursor: pointer;
+      outline: none;
+      &.selected {
+        color: #fff;
+        background-color: #6d1404;
+        position: relative;
+        &::after {
+          content: ' ';
+          position: absolute;
+          right: -18px;
+          border: 9px solid;
+          border-right-color: transparent;
+          border-left-color: #6d1423;
+          border-bottom-color: transparent;
+          border-top-color: transparent;
+        }
+      }
+    }
+  }
+  .payment-method-container {
+    float: left;
+    padding: 30px 0 0 20px;
+  }
+}

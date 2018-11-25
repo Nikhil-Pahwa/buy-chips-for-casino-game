@@ -1,0 +1,13 @@
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 75%;
+  margin: 60px auto;
+  height: 500px;
+  background: #fff;
+}
+
+.container::before {
+  display: table;
+  content: ' ';
+}

@@ -1,0 +1,29 @@
+.package {
+  margin-right: 41px;
+  padding: 0 18px;
+  background-color: #6d1404;
+  color: #fff;
+  width: 130px;
+  float: left;
+  text-align: center;
+  height: 115px;
+  cursor: pointer;
+  .promotion {
+    background-color: #fbfb00;
+    color: #6d1404;
+    text-align: center;
+    width: 68px;
+    height: 48px;
+    margin: 0 auto;
+    .value {
+      display: block;
+    }
+  }
+  .amount {
+    margin-top: 10px;
+  }
+}
+
+input[type='text'] {
+  width: 50px;
+}

@@ -1,0 +1,50 @@
+<div class="list-container form-group">
+  <select class="form-control" [(ngModel)]="cardInfo.cardType" required>
+    <option value="">Select Your Card</option>
+    <option *ngFor="let card of cardList" [ngValue]="card">{{ card }}</option>
+  </select>
+</div>
+<div class="card-info-panel" *ngIf="cardInfo.cardType">
+  <input
+    autocomplete="off"
+    class="form-control"
+    maxlength="16"
+    placeholder="Enter card number"
+    type="text"
+    [(ngModel)]="cardInfo.cardNo"
+  />
+  <span class="card-types"></span>
+  <div class="card-details">
+    <div class="card-exp-date">
+      <div class="input-label">Expiry Date</div>
+      <div class="card-month">
+        <select class="form-control" [(ngModel)]="cardInfo.expMonth" required>
+          <option value="0">MM</option>
+          <option *ngFor="let month of months" [ngValue]="month">{{
+            month
+          }}</option>
+        </select>
+      </div>
+      <div class="card-year">
+        <select class="form-control" [(ngModel)]="cardInfo.expYear" required>
+          <option value="0">YYYY</option>
+          <option *ngFor="let year of years" [ngValue]="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="card-cvv">
+      <div class="input-label">CVV</div>
+      <input
+        autocomplete="off"
+        class="form-control"
+        [(ngModel)]="cardInfo.cvvNo"
+        maxlength="3"
+        type="password"
+      />
+    </div>
+  </div>
+  <br />
+  <button class="btn btn-success" (click)="payNow()">PAY NOW ❯❯</button>
+</div>

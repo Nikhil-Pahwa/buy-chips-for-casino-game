@@ -1,0 +1,26 @@
+.list-container {
+  width: 200px;
+}
+.card-info-panel {
+  width: 400px;
+}
+.card-details {
+  margin-top: 5px;
+  .card-exp-date {
+    display: inline-block;
+    .card-month {
+      width: 75px;
+      display: inline-block;
+    }
+    .card-year {
+      width: 90px;
+      display: inline-block;
+      margin-left: 13px;
+    }
+  }
+  .card-cvv {
+    display: inline-block;
+    width: 64px;
+    margin-left: 35px;
+  }
+}

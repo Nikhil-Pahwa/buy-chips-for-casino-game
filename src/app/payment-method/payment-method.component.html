@@ -1,3 +1,16 @@
-<p>
-  payment-method works!
-</p>
+<div class="payment-method">
+  <ul>
+    <li [routerLink]="['credit-card']" routerLinkActive="selected">
+      Credit Card
+    </li>
+    <li [routerLink]="['debit-card']" routerLinkActive="selected">
+      Debit Card
+    </li>
+    <li [routerLink]="['net-banking']" routerLinkActive="selected">
+      Net Banking
+    </li>
+    <li [routerLink]="['wallet']" routerLinkActive="selected">Wallet</li>
+    <li [routerLink]="['cash-card']" routerLinkActive="selected">Cash Card</li>
+  </ul>
+  <div class="payment-method-container"><router-outlet></router-outlet></div>
+</div>

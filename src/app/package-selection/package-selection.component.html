@@ -1,3 +1,28 @@
-<p>
-  package-selection works!
-</p>
+<ul>
+  <li
+    class="package"
+    *ngFor="let package of packages"
+    (click)="selectedPackage = package"
+  >
+    <div class="promotion">
+      <span class="label">{{ package.promotion?.label }}</span>
+      <span class="value">{{ package.promotion?.value }}</span>
+    </div>
+    <div class="amount" *ngIf="!package.isUserInput">{{ package.amount }}</div>
+    <input
+      *ngIf="package.isUserInput"
+      type="text"
+      [(ngModel)]="package.amount"
+    />
+    <div class="">
+      <input
+        type="radio"
+        [checked]="selectedPackage.amount === package.amount"
+      />
+    </div>
+  </li>
+</ul>
+{{ selectedPackage | json }}
+<button class="btn btn-success" (click)="continueToPaymentPage()">
+  CONTINUE ❯❯
+</button>
