@@ -12,7 +12,7 @@ export class PaymentWizardComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe(event => {
       const root: ActivatedRoute = this.activatedRoute.root;
-      console.log(root.snapshot.url);
+      console.log(event);
       // this.breadcrumbs = this.getBreadcrumbs(root);
     });
   }

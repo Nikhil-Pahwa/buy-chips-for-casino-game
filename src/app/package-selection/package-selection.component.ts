@@ -1,46 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Package } from 'src/models/package';
-import { DataService } from '../data/data.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Package } from 'src/app/package-selection/package';
+import { Subscription } from 'rxjs';
+import { PackageListService } from './package-list.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-package-selection',
   templateUrl: './package-selection.component.html',
   styleUrls: ['./package-selection.component.scss']
 })
-export class PackageSelectionComponent implements OnInit {
-  packages: Package[] = [
-    {
-      promotion: {
-        label: 'Bonus',
-        value: 100
-      },
-      amount: 50
-    },
-    {
-      promotion: {
-        label: 'Bonus',
-        value: 100
-      },
-      amount: 100
-    },
-    {
-      amount: 200
-    },
-    {
-      isUserInput: true
-    }
-  ];
+export class PackageSelectionComponent implements OnInit, OnDestroy {
+  /**
+   * Selected package
+   */
+  selectedPackage: Package;
 
-  selectedPackage = this.packages[1];
+  /**
+   * List of all available Packages
+   */
+  packages: Package[];
 
-  constructor(private dataService: DataService, private route: Router) {}
+  dataServiceSubscription: Subscription;
 
-  ngOnInit() {}
+  /**
+   * Creates an instance of package selection component.
+   * @param dataService
+   * @param route
+   */
+  constructor(
+    private route: Router,
+    private dataService: DataService,
+    private packageListService: PackageListService
+  ) {}
 
-  continueToPaymentPage() {
+  /**
+   * on init fetches list of all available packages
+   */
+  ngOnInit() {
+    this.dataServiceSubscription = this.packageListService
+      .getPackages()
+      .subscribe((packages: Package[]) => {
+        this.packages = packages;
+        // Set second selection to be selected to default
+        this.selectedPackage = packages[1];
+      });
+  }
+
+  /**
+   * Continues to payment page on user click on continue button
+   */
+  continueToPaymentPage(): void {
     this.dataService.selectedPackage = this.selectedPackage;
-    this.route.navigate(['/payment-method/credit-card']);
+    if (this.isValidPackageSelection) {
+      this.route.navigate(['/payment-method/credit-card']);
+    }
+  }
+
+  /**
+   * Determines whether package selection is valid
+   */
+  private isValidPackageSelection(): boolean {
+    return this.selectedPackage.amount > 0;
+  }
+
+  /**
+   * on destroy unsubscribe data service
+   */
+  ngOnDestroy() {
+    if (this.dataServiceSubscription !== Subscription.EMPTY) {
+      this.dataServiceSubscription.unsubscribe();
+    }
   }
 }
