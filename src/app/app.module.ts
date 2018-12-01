@@ -18,9 +18,15 @@ import { CashCardComponent } from './payment-method/cash-card/cash-card.componen
 import { CardInfoPanelComponent } from './payment-method/card-info-panel/card-info-panel.component';
 import { SuccessfulDepositComponent } from './successful-deposit/successful-deposit.component';
 import { PaymentWizardComponent } from './payment-wizard/payment-wizard.component';
-import { SharedModule } from 'src/shared/sharaed.module';
+import { SharedModule } from 'src/shared/shared.module';
 import { TestPackageListService } from './package-selection/test-package-list-service';
 import { PackageListService } from './package-selection/package-list.service';
+import { PackageMethodService } from './payment-method/payment-method-service';
+import { TestPackageMethodService } from './payment-method/test-payment-method-service';
+
+function TestPackageMethodServiceFactory() {
+  return new TestPackageMethodService();
+}
 
 function PackageListServiceFactory() {
   return new TestPackageListService();
@@ -49,7 +55,10 @@ function PackageListServiceFactory() {
   ],
   providers: [
     DataService,
-    // PackageListService
+    {
+      provide: PackageMethodService,
+      useFactory: TestPackageMethodServiceFactory
+    },
     { provide: PackageListService, useFactory: PackageListServiceFactory }
   ],
   bootstrap: [AppComponent]

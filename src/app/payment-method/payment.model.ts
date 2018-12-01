@@ -2,7 +2,7 @@ export class CreditCard {
   types: string[];
 }
 
-export class DeditCard {
+export class DebitCard {
   types: string[];
 }
 
@@ -12,7 +12,7 @@ export class NetBanking {
 
 export class PaymentMethods {
   creditCard?: CreditCard;
-  debitCard?: DeditCard;
+  debitCard?: DebitCard;
   netBanking?: NetBanking;
 }
 
