@@ -1,10 +1,14 @@
+ul {
+  text-align: center;
+  margin: 25px 0;
+}
 .package {
   margin-right: 41px;
   padding: 0 18px;
   background-color: #6d1404;
   color: #fff;
   width: 130px;
-  float: left;
+  display: inline-block;
   text-align: center;
   height: 115px;
   cursor: pointer;
@@ -29,4 +33,9 @@
 
 input[type='text'] {
   width: 50px;
+}
+
+button {
+  float: right;
+  margin: 71px;
 }

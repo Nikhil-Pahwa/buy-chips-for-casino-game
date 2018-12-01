@@ -1,7 +1,6 @@
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  width: 75%;
+  padding: 0;
+  width: 50%;
   margin: 60px auto;
   height: 500px;
   background: #fff;

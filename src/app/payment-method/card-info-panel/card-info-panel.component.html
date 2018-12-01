@@ -1,8 +1,8 @@
-<form name="form" (ngSubmit)="payNow()" #cardInfo="ngForm" novalidate>
+<form name="form" (ngSubmit)="payNow()" #cardInfoForm="ngForm" novalidate>
   <div class="list-container form-group">
     <select
       class="form-control"
-      name="cardInfo"
+      name="cardInfoPanel"
       [(ngModel)]="cardInfo.cardType"
       required
     >

@@ -1,3 +1,16 @@
-<p>
-  net-banking works!
-</p>
+<form name="form" (ngSubmit)="payNow()" #bankListForm="ngForm" novalidate>
+  <div class="list-container form-group">
+    <select
+      class="form-control"
+      name="cardInfoPanel"
+      [(ngModel)]="cardInfo.cardType"
+      required
+    >
+      <option value="">Select Your Bank</option>
+      <option *ngFor="let bankName of bankList?.banks" [ngValue]="bankName">{{
+        bankName
+      }}</option>
+    </select>
+  </div>
+  <button class="btn btn-success" (click)="payNow()">PAY NOW ❯❯</button>
+</form>

@@ -9,7 +9,7 @@ import { CardInfo, defaultCardInfo } from '../payment.model';
   styleUrls: ['./card-info-panel.component.scss']
 })
 export class CardInfoPanelComponent implements OnInit {
-  @ViewChild('cardInfo') cardInfoPanel: HTMLFormElement;
+  @ViewChild('cardInfoForm') cardInfoPanel: HTMLFormElement;
   @Input() cardList: string[];
   cardInfo: CardInfo = { ...defaultCardInfo };
   years: number[] = [];

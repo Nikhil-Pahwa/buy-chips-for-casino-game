@@ -25,5 +25,6 @@ export const dummyPackages = [
 
 export const dummyPaymentMethods: PaymentMethods = {
   creditCard: { types: ['cc-test-1', 'cc-test-2'] },
-  debitCard: { types: ['dc-test-1', 'dc-test-2'] }
+  debitCard: { types: ['dc-test-1', 'dc-test-2'] },
+  netBanking: { banks: ['Axis', 'Canara', 'Punjab National'] }
 };
