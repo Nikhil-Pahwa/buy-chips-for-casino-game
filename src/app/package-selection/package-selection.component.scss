@@ -8,15 +8,18 @@
   text-align: center;
   height: 115px;
   cursor: pointer;
-  .promotion {
-    background-color: #fbfb00;
-    color: #6d1404;
-    text-align: center;
+  .promotion-container {
     width: 68px;
     height: 48px;
     margin: 0 auto;
-    .value {
-      display: block;
+    .promotion {
+      background-color: #fbfb00;
+      color: #6d1404;
+      text-align: center;
+      margin: 0 auto;
+      .value {
+        display: block;
+      }
     }
   }
   .amount {

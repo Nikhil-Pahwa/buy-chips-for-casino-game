@@ -25,6 +25,11 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
   dataServiceSubscription: Subscription;
 
   /**
+   * Default selected package index
+   */
+  private defaultSelectedPackageIndex = 1;
+
+  /**
    * Creates an instance of package selection component.
    * @param dataService
    * @param route
@@ -41,11 +46,17 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dataServiceSubscription = this.packageListService
       .getPackages()
-      .subscribe((packages: Package[]) => {
-        this.packages = packages;
-        // Set second selection to be selected to default
-        this.selectedPackage = packages[1];
-      });
+      .subscribe(
+        (packages: Package[]) => {
+          this.packages = packages;
+          // set second selection to be selected to default
+          this.selectedPackage = packages[this.defaultSelectedPackageIndex];
+          this.selectLastSelectedPackage();
+        },
+        error => {
+          console.log('service error');
+        }
+      );
   }
 
   /**
@@ -53,7 +64,7 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
    */
   continueToPaymentPage(): void {
     this.dataService.selectedPackage = this.selectedPackage;
-    if (this.isValidPackageSelection) {
+    if (this.isValidPackageSelection()) {
       this.route.navigate(['/payment-method/credit-card']);
     }
   }
@@ -63,6 +74,24 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
    */
   private isValidPackageSelection(): boolean {
     return this.selectedPackage.amount > 0;
+  }
+
+  private selectLastSelectedPackage() {
+    const currentSelectedPackage = this.dataService.selectedPackage;
+
+    if (currentSelectedPackage && currentSelectedPackage.isUserInput) {
+      this.selectedPackage = currentSelectedPackage;
+      const lastElementFromPackages = this.packages[this.packages.length - 1];
+      if (lastElementFromPackages.isUserInput) {
+        this.packages[this.packages.length - 1] = this.selectedPackage;
+      }
+    } else {
+      if (this.packages.indexOf(this.dataService.selectedPackage) > -1) {
+        this.selectedPackage = this.dataService.selectedPackage;
+      } else {
+        this.selectedPackage = this.packages[this.defaultSelectedPackageIndex];
+      }
+    }
   }
 
   /**
