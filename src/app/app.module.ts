@@ -23,6 +23,7 @@ import { TestPackageListService } from './package-selection/test-package-list-se
 import { PackageListService } from './package-selection/package-list.service';
 import { PackageMethodService } from './payment-method/payment-method-service';
 import { TestPackageMethodService } from './payment-method/test-payment-method-service';
+import { PaymentWizardService } from './payment-wizard/payment-wizard.service';
 
 function TestPackageMethodServiceFactory() {
   return new TestPackageMethodService();
@@ -55,6 +56,7 @@ function PackageListServiceFactory() {
   ],
   providers: [
     DataService,
+    PaymentWizardService,
     {
       provide: PackageMethodService,
       useFactory: TestPackageMethodServiceFactory

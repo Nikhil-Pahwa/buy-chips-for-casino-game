@@ -1,3 +1,19 @@
-<p>
-  payment-wizard works!
-</p>
+<div class="steps-container" [ngSwitch]="activeStep?.selectedStep">
+  <ng-container *ngSwitchCase="paymentSteps.packageSelection">
+    <div class="steps">1. Enter Amount</div>
+  </ng-container>
+  <ng-container *ngSwitchCase="paymentSteps.paymentMethod">
+    <div class="steps link" [routerLink]="['package-selection']">
+      1. Enter Amount
+    </div>
+    <div class="steps">2. Choose Payment Method</div>
+    <div class="amount">
+      Amount: <span class="amountValue">Rs.{{ selectedPackage?.amount }}</span>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="paymentSteps.successfulDeposit">
+    <div class="steps link">1. Enter Amount</div>
+    <div class="steps link">2. Choose Payment Method</div>
+  </ng-container>
+</div>
+<div class="clearfix"></div>

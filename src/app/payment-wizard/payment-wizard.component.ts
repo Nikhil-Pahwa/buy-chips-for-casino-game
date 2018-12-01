@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { PaymentWizardService } from './payment-wizard.service';
+import { PaymentSteps, PaymentWizard } from './payment-wizard';
+import { DataService } from '../data.service';
+import { Package } from '../package-selection/package';
 
 @Component({
   selector: 'app-payment-wizard',
@@ -7,13 +11,18 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./payment-wizard.component.scss']
 })
 export class PaymentWizardComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private paymentWizardService: PaymentWizardService,
+    private dataService: DataService
+  ) {}
+  selectedPackage: Package;
+  paymentSteps = PaymentSteps;
+  activeStep: PaymentWizard;
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
-      const root: ActivatedRoute = this.activatedRoute.root;
-      console.log(event);
-      // this.breadcrumbs = this.getBreadcrumbs(root);
+    this.paymentWizardService.wizardUpdate$.subscribe(paymentWizard => {
+      this.activeStep = paymentWizard;
+      this.selectedPackage = this.dataService.selectedPackage;
     });
   }
 }

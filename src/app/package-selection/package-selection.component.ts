@@ -5,6 +5,8 @@ import { Package } from 'src/app/package-selection/package';
 import { Subscription } from 'rxjs';
 import { PackageListService } from './package-list.service';
 import { DataService } from '../data.service';
+import { PaymentWizardService } from '../payment-wizard/payment-wizard.service';
+import { PaymentSteps } from '../payment-wizard/payment-wizard';
 
 @Component({
   selector: 'app-package-selection',
@@ -37,13 +39,18 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
   constructor(
     private route: Router,
     private dataService: DataService,
-    private packageListService: PackageListService
+    private packageListService: PackageListService,
+    private paymentWizardService: PaymentWizardService
   ) {}
 
   /**
    * on init fetches list of all available packages
    */
   ngOnInit() {
+    this.paymentWizardService.wizardUpdate$.next({
+      selectedStep: PaymentSteps.packageSelection
+    });
+
     this.dataServiceSubscription = this.packageListService
       .getPackages()
       .subscribe(
