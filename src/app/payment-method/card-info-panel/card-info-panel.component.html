@@ -7,12 +7,20 @@
 <div class="card-info-panel" *ngIf="cardInfo.cardType">
   <input
     autocomplete="off"
+    appBlockCopyPaste
     class="form-control"
     maxlength="16"
     placeholder="Enter card number"
     type="text"
+    required
+    #creditCard="ngModel"
     [(ngModel)]="cardInfo.cardNo"
   />
+  <div *ngIf="creditCard.invalid && (creditCard.dirty || creditCard.touched)">
+    <div class="alert alert-danger" *ngIf="creditCard.errors.required">
+      <strong>Error!</strong> Credit Card number is required.
+    </div>
+  </div>
   <span class="card-types"></span>
   <div class="card-details">
     <div class="card-exp-date">
@@ -41,10 +49,21 @@
         class="form-control"
         [(ngModel)]="cardInfo.cvvNo"
         maxlength="3"
+        #cvv="ngModel"
+        required
+        pattern="[0-9]{3}"
         type="password"
       />
     </div>
+    <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched)">
+      <div class="alert alert-danger" *ngIf="cvv.errors.required">
+        <strong>Error!</strong> CVV number is required.
+      </div>
+      <div class="alert alert-danger" *ngIf="cvv.errors.pattern">
+        <strong>Error!</strong> CVV format is incorrect.
+      </div>
+    </div>
   </div>
   <br />
-  <button class="btn btn-success" (click)="payNow()">PAY NOW ❯❯</button>
 </div>
+<button class="btn btn-success" (click)="payNow()">PAY NOW ❯❯</button>

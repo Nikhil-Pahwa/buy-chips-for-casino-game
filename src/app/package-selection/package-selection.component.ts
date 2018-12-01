@@ -41,6 +41,6 @@ export class PackageSelectionComponent implements OnInit {
 
   continueToPaymentPage() {
     this.dataService.selectedPackage = this.selectedPackage;
-    this.route.navigate(['/payment-method']);
+    this.route.navigate(['/payment-method/credit-card']);
   }
 }

@@ -15,6 +15,8 @@ import { WalletComponent } from './payment-method/wallet/wallet.component';
 import { CashCardComponent } from './payment-method/cash-card/cash-card.component';
 import { CardInfoPanelComponent } from './payment-method/card-info-panel/card-info-panel.component';
 import { SuccessfulDepositComponent } from './successful-deposit/successful-deposit.component';
+import { PaymentWizardComponent } from './payment-wizard/payment-wizard.component';
+import { SharedModule } from 'src/shared/sharaed.module';
 
 const appRoutes: Routes = [
   { path: 'package-selection', component: PackageSelectionComponent },
@@ -61,9 +63,15 @@ const appRoutes: Routes = [
     WalletComponent,
     CashCardComponent,
     CardInfoPanelComponent,
-    SuccessfulDepositComponent
+    SuccessfulDepositComponent,
+    PaymentWizardComponent
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    SharedModule
+  ],
   providers: [DataService],
   bootstrap: [AppComponent]
 })
