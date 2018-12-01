@@ -1,69 +1,88 @@
-<div class="list-container form-group">
-  <select class="form-control" [(ngModel)]="cardInfo.cardType" required>
-    <option value="">Select Your Card</option>
-    <option *ngFor="let card of cardList" [ngValue]="card">{{ card }}</option>
-  </select>
-</div>
-<div class="card-info-panel" *ngIf="cardInfo.cardType">
-  <input
-    autocomplete="off"
-    appBlockCopyPaste
-    class="form-control"
-    maxlength="16"
-    placeholder="Enter card number"
-    type="text"
-    required
-    #creditCard="ngModel"
-    [(ngModel)]="cardInfo.cardNo"
-  />
-  <div *ngIf="creditCard.invalid && (creditCard.dirty || creditCard.touched)">
-    <div class="alert alert-danger" *ngIf="creditCard.errors.required">
-      <strong>Error!</strong> Credit Card number is required.
-    </div>
+<form name="form" (ngSubmit)="payNow()" #cardInfo="ngForm" novalidate>
+  <div class="list-container form-group">
+    <select
+      class="form-control"
+      name="cardInfo"
+      [(ngModel)]="cardInfo.cardType"
+      required
+    >
+      <option value="">Select Your Card</option>
+      <option *ngFor="let card of cardList" [ngValue]="card">{{ card }}</option>
+    </select>
   </div>
-  <span class="card-types"></span>
-  <div class="card-details">
-    <div class="card-exp-date">
-      <div class="input-label">Expiry Date</div>
-      <div class="card-month">
-        <select class="form-control" [(ngModel)]="cardInfo.expMonth" required>
-          <option value="0">MM</option>
-          <option *ngFor="let month of months" [ngValue]="month">{{
-            month
-          }}</option>
-        </select>
-      </div>
-      <div class="card-year">
-        <select class="form-control" [(ngModel)]="cardInfo.expYear" required>
-          <option value="0">YYYY</option>
-          <option *ngFor="let year of years" [ngValue]="year">
-            {{ year }}
-          </option>
-        </select>
+  <div class="card-info-panel" *ngIf="cardInfo.cardType">
+    <input
+      autocomplete="off"
+      appBlockCopyPaste
+      class="form-control"
+      maxlength="16"
+      placeholder="Enter card number"
+      type="text"
+      name="creditCard"
+      required
+      #creditCard="ngModel"
+      [(ngModel)]="cardInfo.cardNo"
+    />
+    <div *ngIf="creditCard.invalid && (creditCard.dirty || creditCard.touched)">
+      <div class="alert alert-danger" *ngIf="creditCard.errors.required">
+        <strong>Error!</strong> Credit Card number is required.
       </div>
     </div>
-    <div class="card-cvv">
-      <div class="input-label">CVV</div>
-      <input
-        autocomplete="off"
-        class="form-control"
-        [(ngModel)]="cardInfo.cvvNo"
-        maxlength="3"
-        #cvv="ngModel"
-        required
-        pattern="[0-9]{3}"
-        type="password"
-      />
-    </div>
-    <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched)">
-      <div class="alert alert-danger" *ngIf="cvv.errors.required">
-        <strong>Error!</strong> CVV number is required.
+    <span class="card-types"></span>
+    <div class="card-details">
+      <div class="card-exp-date">
+        <div class="input-label">Expiry Date</div>
+        <div class="card-month">
+          <select
+            name="expMonth"
+            class="form-control"
+            [(ngModel)]="cardInfo.expMonth"
+            required
+          >
+            <option value="0">MM</option>
+            <option *ngFor="let month of months" [ngValue]="month">{{
+              month
+            }}</option>
+          </select>
+        </div>
+        <div class="card-year">
+          <select
+            name="expYear"
+            class="form-control"
+            [(ngModel)]="cardInfo.expYear"
+            required
+          >
+            <option value="0">YYYY</option>
+            <option *ngFor="let year of years" [ngValue]="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="alert alert-danger" *ngIf="cvv.errors.pattern">
-        <strong>Error!</strong> CVV format is incorrect.
+      <div class="card-cvv">
+        <div class="input-label">CVV</div>
+        <input
+          autocomplete="off"
+          class="form-control"
+          [(ngModel)]="cardInfo.cvvNo"
+          maxlength="3"
+          name="cvv"
+          #cvv="ngModel"
+          required
+          pattern="[0-9]{3}"
+          type="password"
+        />
+      </div>
+      <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched)">
+        <div class="alert alert-danger" *ngIf="cvv.errors.required">
+          <strong>Error!</strong> CVV number is required.
+        </div>
+        <div class="alert alert-danger" *ngIf="cvv.errors.pattern">
+          <strong>Error!</strong> CVV format is incorrect.
+        </div>
       </div>
     </div>
+    <br />
   </div>
-  <br />
-</div>
-<button class="btn btn-success" (click)="payNow()">PAY NOW ❯❯</button>
+  <button class="btn btn-success" (click)="payNow()">PAY NOW ❯❯</button>
+</form>

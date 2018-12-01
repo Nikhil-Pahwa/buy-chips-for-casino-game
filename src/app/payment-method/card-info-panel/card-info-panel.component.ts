@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CardInfo, defaultCardInfo } from '../payment.model';
@@ -9,6 +9,7 @@ import { CardInfo, defaultCardInfo } from '../payment.model';
   styleUrls: ['./card-info-panel.component.scss']
 })
 export class CardInfoPanelComponent implements OnInit {
+  @ViewChild('cardInfo') cardInfoPanel: HTMLFormElement;
   @Input() cardList: string[];
   cardInfo: CardInfo = { ...defaultCardInfo };
   years: number[] = [];
@@ -30,6 +31,9 @@ export class CardInfoPanelComponent implements OnInit {
   }
 
   payNow() {
+    if (!this.cardInfoPanel.valid) {
+      return;
+    }
     // Make http request to deduct money. If success redirect to success page else stay here and show error msg
     this.route.navigate(['/successful-deposit']);
   }
