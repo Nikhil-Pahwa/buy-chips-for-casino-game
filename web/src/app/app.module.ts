@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -18,13 +18,14 @@ import { CashCardComponent } from './payment-method/cash-card/cash-card.componen
 import { CardInfoPanelComponent } from './payment-method/card-info-panel/card-info-panel.component';
 import { SuccessfulDepositComponent } from './successful-deposit/successful-deposit.component';
 import { PaymentWizardComponent } from './payment-wizard/payment-wizard.component';
-import { SharedModule } from 'src/shared/shared.module';
 import { TestPackageListService } from './package-selection/test-package-list-service';
 import { PackageListService } from './package-selection/package-list.service';
 import { PackageMethodService } from './payment-method/payment-method-service';
 import { TestPackageMethodService } from './payment-method/test-payment-method-service';
 import { PaymentWizardService } from './payment-wizard/payment-wizard.service';
 import { AppGuard } from './app.guard';
+import { CoreModule } from 'src/core/core.module';
+import { ExceptionHandler } from 'src/core/services';
 
 function TestPackageMethodServiceFactory() {
   return new TestPackageMethodService();
@@ -53,12 +54,13 @@ function PackageListServiceFactory() {
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    SharedModule
+    CoreModule
   ],
   providers: [
     DataService,
     PaymentWizardService,
     AppGuard,
+    { provide: ErrorHandler, useClass: ExceptionHandler },
     {
       provide: PackageMethodService,
       useFactory: TestPackageMethodServiceFactory

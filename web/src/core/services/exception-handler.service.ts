@@ -1,11 +1,10 @@
 import { ErrorHandler, Injectable } from '@angular/core';
-
-import { environment } from '../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ExceptionHandler extends ErrorHandler {
   constructor() {
-    super(true);
+    super();
   }
 
   handleError(error: any): void {
