@@ -8,12 +8,14 @@ import { WalletComponent } from './payment-method/wallet/wallet.component';
 import { CashCardComponent } from './payment-method/cash-card/cash-card.component';
 import { SuccessfulDepositComponent } from './successful-deposit/successful-deposit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AppGuard } from './app.guard';
 
 export const appRoutes: Routes = [
   { path: 'package-selection', component: PackageSelectionComponent },
   {
     path: 'payment-method',
     component: PaymentMethodComponent,
+    canActivate: [AppGuard],
     children: [
       {
         path: 'credit-card',
@@ -37,7 +39,11 @@ export const appRoutes: Routes = [
       }
     ]
   },
-  { path: 'successful-deposit', component: SuccessfulDepositComponent },
+  {
+    path: 'successful-deposit',
+    component: SuccessfulDepositComponent,
+    canActivate: [AppGuard]
+  },
   { path: '', redirectTo: '/package-selection', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
