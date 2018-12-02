@@ -3,6 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { appRoutes } from './app.routes';
 import { AppComponent } from './app.component';
@@ -27,12 +28,14 @@ import { AppGuard } from './app.guard';
 import { CoreModule } from 'src/core/core.module';
 import { ExceptionHandler } from 'src/core/services';
 
-function TestPackageMethodServiceFactory() {
-  return new TestPackageMethodService();
+function TestPackageMethodServiceFactory(httpClient: HttpClient) {
+  return new PackageMethodService(httpClient);
+  // return new TestPackageMethodService();
 }
 
-function PackageListServiceFactory() {
-  return new TestPackageListService();
+function PackageListServiceFactory(httpClient: HttpClient) {
+  return new PackageListService(httpClient);
+  // return new TestPackageListService();
 }
 @NgModule({
   declarations: [
@@ -63,9 +66,14 @@ function PackageListServiceFactory() {
     { provide: ErrorHandler, useClass: ExceptionHandler },
     {
       provide: PackageMethodService,
-      useFactory: TestPackageMethodServiceFactory
+      useFactory: TestPackageMethodServiceFactory,
+      deps: [HttpClient]
     },
-    { provide: PackageListService, useFactory: PackageListServiceFactory }
+    {
+      provide: PackageListService,
+      useFactory: PackageListServiceFactory,
+      deps: [HttpClient]
+    }
   ],
   bootstrap: [AppComponent]
 })

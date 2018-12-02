@@ -1,5 +1,6 @@
+import { environment } from '../environments/environment';
 export namespace AppSettings {
-  export const devServer = '';
+  export const devServer = environment.apiBaseUrl;
   export const productionServer = '';
 
   export const webServer: string = devServer;

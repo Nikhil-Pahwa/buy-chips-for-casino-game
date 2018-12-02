@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ExceptionHandler } from './services/';
 import { BlockCopyPasteDirective } from './directives';
@@ -8,7 +8,7 @@ import { BlockCopyPasteDirective } from './directives';
 @NgModule({
   declarations: [BlockCopyPasteDirective],
   exports: [],
-  imports: [BrowserModule, HttpModule],
+  imports: [BrowserModule, HttpClientModule],
   providers: [ExceptionHandler]
 })
 export class CoreModule {}
