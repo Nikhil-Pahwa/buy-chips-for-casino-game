@@ -46,6 +46,7 @@ function PackageListServiceFactory(httpClient: HttpClient) {
     SuccessfulDepositComponent,
     PaymentWizardComponent
   ],
+  exports: [PaymentWizardComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

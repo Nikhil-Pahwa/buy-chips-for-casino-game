@@ -7,8 +7,8 @@ import { NetBankingComponent } from './payment-method/net-banking/net-banking.co
 import { WalletComponent } from './payment-method/wallet/wallet.component';
 import { CashCardComponent } from './payment-method/cash-card/cash-card.component';
 import { SuccessfulDepositComponent } from './successful-deposit/successful-deposit.component';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { PaymentGuard } from './payment.guard';
+import { PageNotFoundComponent } from '../core/components/page-not-found/page-not-found.component';
 
 export const paymentRoutes: Routes = [
   { path: 'package-selection', component: PackageSelectionComponent },
