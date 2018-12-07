@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/payment/data.service';
 
 @Component({
   selector: 'app-debit-card',

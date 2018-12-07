@@ -7,15 +7,15 @@ import { NetBankingComponent } from './payment-method/net-banking/net-banking.co
 import { WalletComponent } from './payment-method/wallet/wallet.component';
 import { CashCardComponent } from './payment-method/cash-card/cash-card.component';
 import { SuccessfulDepositComponent } from './successful-deposit/successful-deposit.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AppGuard } from './app.guard';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PaymentGuard } from './payment.guard';
 
-export const appRoutes: Routes = [
+export const paymentRoutes: Routes = [
   { path: 'package-selection', component: PackageSelectionComponent },
   {
     path: 'payment-method',
     component: PaymentMethodComponent,
-    canActivate: [AppGuard],
+    canActivate: [PaymentGuard],
     children: [
       {
         path: 'credit-card',
@@ -42,7 +42,7 @@ export const appRoutes: Routes = [
   {
     path: 'successful-deposit',
     component: SuccessfulDepositComponent,
-    canActivate: [AppGuard]
+    canActivate: [PaymentGuard]
   },
   { path: '', redirectTo: '/package-selection', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { PaymentMethods } from './payment.model';
-import { AppSettings } from '../app.settings';
+import { AppSettings } from 'src/app/app.settings';
 
 @Injectable()
 export class PackageMethodService {

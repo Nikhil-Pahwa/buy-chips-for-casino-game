@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CardInfo, defaultCardInfo, NetBanking } from '../payment.model';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/payment/data.service';
 
 @Component({
   selector: 'app-net-banking',

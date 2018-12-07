@@ -1,4 +1,4 @@
-import { PaymentMethods } from '../payment-method/payment.model';
+import { PaymentMethods } from '../payment/payment-method/payment.model';
 
 export const dummyPackages = [
   {

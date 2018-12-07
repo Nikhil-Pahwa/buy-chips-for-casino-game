@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 
 @Injectable()
-export class AppGuard implements CanActivate {
+export class PaymentGuard implements CanActivate {
   constructor(private dataService: DataService, private router: Router) {}
 
   canActivate(

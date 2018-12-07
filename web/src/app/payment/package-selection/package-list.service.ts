@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Package } from 'src/app/package-selection/package';
-import { AppSettings } from '../app.settings';
+import { Package } from './package';
+import { AppSettings } from 'src/app/app.settings';
 
 @Injectable()
 export class PackageListService {

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Package } from 'src/app/package-selection/package';
 import { Subscription } from 'rxjs';
 import { PackageListService } from './package-list.service';
 import { DataService } from '../data.service';
 import { PaymentWizardService } from '../payment-wizard/payment-wizard.service';
 import { PaymentSteps } from '../payment-wizard/payment-wizard';
+import { Package } from './package';
 
 @Component({
   selector: 'app-package-selection',

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { Package } from 'src/app/package-selection/package';
 import { PaymentMethods } from './payment-method/payment.model';
+import { Package } from './package-selection/package';
 
 @Injectable()
 export class DataService {
