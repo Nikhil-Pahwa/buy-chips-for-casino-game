@@ -4,6 +4,7 @@ export interface Promotion {
 }
 
 export interface Package {
+  packageId: number;
   promotion?: Promotion;
   amount?: number;
   isUserInput?: boolean;

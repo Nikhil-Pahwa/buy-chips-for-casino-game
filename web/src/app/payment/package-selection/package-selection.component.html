@@ -3,7 +3,7 @@
     <li
       class="package"
       *ngFor="let package of packages"
-      (click)="selectedPackage = package"
+      (click)="selectedPackage = package; setPackage(package)"
     >
       <div class="promotion-container">
         <div class="promotion" *ngIf="package.promotion">

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { PackageListService } from './package-list.service';
@@ -38,6 +38,7 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
    */
   constructor(
     private route: Router,
+    private activatedRoute: ActivatedRoute,
     private dataService: DataService,
     private packageListService: PackageListService,
     private paymentWizardService: PaymentWizardService
@@ -56,8 +57,18 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
       .subscribe(
         (packages: Package[]) => {
           this.packages = packages;
+          const packagesIds = packages.map(pkg => pkg.packageId);
           // set second selection to be selected to default
-          this.selectedPackage = packages[this.defaultSelectedPackageIndex];
+          this.activatedRoute.queryParams.subscribe(params => {
+            if (packagesIds.indexOf(+params['pc']) > -1) {
+              this.selectedPackage = packages.filter(
+                pkg => pkg.packageId === +params['pc']
+              )[0];
+            } else {
+              this.selectedPackage = packages[this.defaultSelectedPackageIndex];
+            }
+          });
+
           this.selectLastSelectedPackage();
         },
         error => {
@@ -66,6 +77,11 @@ export class PackageSelectionComponent implements OnInit, OnDestroy {
       );
   }
 
+  setPackage(pc: Package) {
+    this.route.navigate(['/package-selection'], {
+      queryParams: { pc: pc.packageId }
+    });
+  }
   /**
    * Continues to payment page on user click on continue button
    */
