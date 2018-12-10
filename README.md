@@ -8,7 +8,7 @@ b) Backend = The code is in `server` folder.
 
 ## Demo
 
-Click on the link for [demo](<(http://detailed-show.surge.sh)>)
+Click on the link for [demo](http://detailed-show.surge.sh)
 
 ## Backend server
 
